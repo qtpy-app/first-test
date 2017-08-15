@@ -314,7 +314,7 @@ class MyPlot(Function):
         self.axes.arrow(30, 10, 10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
         self.axes.arrow(30, 40, -10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
         self.axes.plot([30, 30], [10, 40],  'k-', linewidth=2, antialiased=True)#弯矩M
-    def drawPin(self):
+    def drawPin(self):#这里有问题
         #        self.ro_x=re.split('\,|\;',Dialog.lineEdit12.text())
         self.axes.cla()
         self.drawline()
