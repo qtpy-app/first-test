@@ -68,8 +68,9 @@ class  Function(  QDialog, Ui_MainWindow):
         self.fig = plt.figure(figsize=(4, 1), dpi=80)
         self.canvas = FigureCanvas(self.fig)
         self.axes = self.fig.add_subplot(111)
-        plt.xlim(0,500)
-        plt.ylim(-100, 100)
+        self.axes.set(xlim=[0,500],ylim=[-100,100])
+#        plt.xlim(0,500)
+#        plt.ylim(-100, 100)
 #        self.toolbar = NavigationToolbar(self.canvas, self)
         self.horizontalLayout11.addWidget(self.canvas)
         FigureCanvas.setSizePolicy(self,
@@ -296,7 +297,7 @@ class MyPlot(Function):
 #        timer.timeout.connect(self.update_figure)
         timer.start(1000)
         self.lineEdit11.textEdited.connect(self.update_figure)
-        self.lineEdit11.textEdited.connect(self.drawPin)     
+#        self.lineEdit11.textEdited.connect(self.drawPin)     
         self.drawline()
         self.drawPin()
         self.drawRoller()
@@ -304,6 +305,8 @@ class MyPlot(Function):
     def drawline(self):
         self.axes.plot([50, 450],[0, 0], 'k-', linewidth=1, antialiased=False)#杆长
     def drawRoller(self):
+#        self.drawline()
+#        self.drawPin()
         self.axes.plot([100, 400], [0, 0], 'ko',  markersize=10, fillstyle= 'none')#圆        
         for p in[mpatches.Rectangle((60,-5), 30, 10, fc='none', hatch='////'), 
             mpatches.Rectangle((120,0), 30, 10, fc='none', hatch='////')]:
@@ -313,12 +316,13 @@ class MyPlot(Function):
         self.axes.arrow(30, 10, 10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
         self.axes.arrow(30, 40, -10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
         self.axes.plot([30, 30], [10, 40],  'k-', linewidth=2, antialiased=True)#弯矩M
+        self.canvas.draw()
     def drawPin(self):#这里有问题
         #        self.ro_x=re.split('\,|\;',Dialog.lineEdit12.text())
-        self.axes.cla()
-        self.drawline()
-        self.drawRoller()
-        self.axes.set(xlim=[0,500],ylim=[-100,100])
+
+#        self.drawline()
+#        self.drawRoller()
+
         d=np.array([])
         x=[]
         self.pin_x=np.array(re.split('\,|\;',self.lineEdit11.text()))
@@ -328,20 +332,24 @@ class MyPlot(Function):
             pass
         for b in range(d.shape[0]):
             x.append(d[b][0])
-            sanjiao=self.axes.plot([x[b]],[0], 'k^',  markersize=10, fillstyle= 'none')#三角
-#                sanjiao.clf()
-#            print(sanjiao)
-#            self.canvas.draw()
-#            i=sanjiao.pop(0)
-#            i.remove()
-#            print('x', x[b])
+            x[b]=float(x[b])
+            sanjiao=self.axes.plot([x[b]],[-8], 'k^',  markersize=10, fillstyle= 'none')#三角
+            self.axes.plot([x[b]-15, x[b]+15],[-16, -16], 'k-', linewidth=1, antialiased=True)#杆长
+            p=mpatches.Rectangle((x[b]-15,-16), 30, -7, fc='none', hatch='////')
+            self.axes.add_patch(p)#阴影填充
+        self.canvas.draw()
+
 #        np.linspace(0, 1, 10, endpoint=False) 
         #均布力
     def update_figure(self):
-        self.canvas.draw()
+        self.axes.cla()
+        self.axes.set(xlim=[0,500],ylim=[-100,100])
         self.drawline()
         self.drawPin()
-        self.drawRoller()     
+        self.drawRoller()   
+
+
+        pass  
         
   
     
