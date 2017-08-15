@@ -65,13 +65,22 @@ class  Function(  QDialog, Ui_MainWindow):
         self.lineEdit2.installEventFilter(self)
         self.lineEdit1.installEventFilter(self)
         '''信号============================================================='''
-
+        self.fig = plt.figure(figsize=(4, 1), dpi=80)
+        self.canvas = FigureCanvas(self.fig)
+        self.axes = self.fig.add_subplot(111)
+        plt.xlim(0,500)
+        plt.ylim(-100, 100)
+        self.canvas = FigureCanvas(self.fig)
+        self.toolbar = NavigationToolbar(self.canvas, self)
+        self.horizontalLayout11.addWidget(self.canvas)
+        FigureCanvas.setSizePolicy(self,
+                                   QSizePolicy.Expanding,
+                                   QSizePolicy.Expanding)
+        FigureCanvas.updateGeometry(self)
 #        self.lineEdit21.textEdited.connect(self.test)
 #        self.lineEdit11.textEdited.connect(self.test)
-        
-        
 
-        
+
 
 #        a = SecondWindow()
 #        self.lineEdit21.textEdited.connect(a.test3)
@@ -182,8 +191,8 @@ class  Function(  QDialog, Ui_MainWindow):
 #       newWindow.show()
 #       newWindow.exec_()
 
-class SecondWindow(  QWidget):
-#    def __init__(self, parent=None):
+class SecondWindow(  QWidget):#暂时没用
+#   def __init__(self, parent=None):
 #        super(SecondWindow, self).__init__(parent)
 #        self.resize(200, 200)
 ##        self.setStyleSheet("background: black")
@@ -250,7 +259,7 @@ class SecondWindow(  QWidget):
 #        print("second xxx:", value)#对比用
         #print(x+10)#这个是可以的
         
-class Input(QWidget):
+class Input(QWidget):#暂时没用
     x2=100
 #    self._
     def __init__(self, *args, **kwargs):
@@ -279,53 +288,19 @@ class Input(QWidget):
     def Q1_and_Q2(self):#均布力大小
         pass
         
-#class Runthread(QThread, Function):
-#    # python3,pyqt5与之前的版本有些不一样
-#    #  通过类成员对象定义信号对象
-#    _signal = pyqtSignal(str)
-#    def __init__(self, parent=None):
-#        super(Runthread, self).__init__()
-#        print('1212')
-##        self.drawline()
-##        self.drawPin()
-##        self.drawRoller()
-##    def __del__(self):
-##        self.wait()
-##    def run(self):
-##        # 处理你要做的业务逻辑，这里是通过一个回调来处理数据，这里的逻辑处理写自己的方法
-##        # wechat.start_auto(self.callback)
-##        # self._signal.emit(msg);  可以在这里写信号焕发
-##        pass
-#    def run(self):
-#        print('do something big')
-#        self._signal.emit()
-class BigThingThread(QThread):
-    finished_signal = pyqtSignal()#第一步
+class MyPlot(Function):
+    """动态画布：每秒自动更新，更换一条折线。"""
     def __init__(self, parent=None):
-        super(BigThingThread, self).__init__(parent)
-        self.fig = plt.figure(figsize=(4, 1), dpi=80)
-        self.canvas = FigureCanvas(self.fig)
-        self.axes = self.fig.add_subplot(111)
-        plt.xlim(0,500)
-        plt.ylim(-100, 100)
-        self.canvas = FigureCanvas(self.fig)
-#        self.toolbar = NavigationToolbar(self.canvas, self)
-#        self.horizontalLayout11.addWidget(self.canvas)
-#        FigureCanvas.setSizePolicy(self,
-#                                   QSizePolicy.Expanding,
-#                                   QSizePolicy.Expanding)
-#        FigureCanvas.updateGeometry(self)
-#
+        super(MyPlot, self).__init__(parent)
+        timer = QtCore.QTimer(self)
+#        self.lineEdit11.textEdited.connect(self.click_do_something)#第三步
+#        timer.timeout.connect(self.update_figure)
+        timer.start(1000)
+        self.lineEdit11.textEdited.connect(self.update_figure)
+        self.lineEdit11.textEdited.connect(self.drawPin)     
         self.drawline()
         self.drawPin()
         self.drawRoller()
-#    def show_message():#第五步
-#        self.drawPin()
-#
-#    def click_do_something(self):
-#        self.big_thread = BigThingThread()#第四步
-#        self.big_thread.finished_signal.connect(self.show_message)
-#        self.big_thread.start()
 
     def drawline(self):
         self.axes.plot([50, 450],[0, 0], 'k-', linewidth=1, antialiased=False)#杆长
@@ -347,7 +322,7 @@ class BigThingThread(QThread):
         self.axes.set(xlim=[0,500],ylim=[-100,100])
         d=np.array([])
         x=[]
-        self.pin_x=np.array(re.split('\,|\;',Dialog.lineEdit11.text()))
+        self.pin_x=np.array(re.split('\,|\;',self.lineEdit11.text()))
         if len(self.pin_x)%2==0:
             d=self.pin_x.reshape((-1, 2))
         else:
@@ -368,22 +343,6 @@ class BigThingThread(QThread):
         self.drawline()
         self.drawPin()
         self.drawRoller()     
-
-
-#        self.finished_signal.emit()#第二步
-
-
-class MyPlot(Function):
-    """动态画布：每秒自动更新，更换一条折线。"""
-    def __init__(self, parent=None):
-        super(MyPlot, self).__init__(parent)
-        timer = QtCore.QTimer(self)
-#        self.lineEdit11.textEdited.connect(self.click_do_something)#第三步
-#        timer.timeout.connect(self.update_figure)
-        timer.start(1000)
-#        self.lineEdit11.textEdited.connect(self.update_figure)
-#        self.lineEdit11.textEdited.connect(self.drawPin)        
-        self.big=BigThingThread()
         
   
     
