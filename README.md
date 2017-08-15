@@ -1,2 +1,3 @@
 # first-test
- 需要pip的库numpy matplotlib
+python3.5
+需要pip的库numpy , matplotlib , pyqt5 
