@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import *
 
 #正则式库 , 自动按键库
 import re
-import pyautogui as auto
+#import pyautogui as auto
 
 #matplotlib类
 import matplotlib.pyplot as plt
