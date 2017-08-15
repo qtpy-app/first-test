@@ -70,8 +70,7 @@ class  Function(  QDialog, Ui_MainWindow):
         self.axes = self.fig.add_subplot(111)
         plt.xlim(0,500)
         plt.ylim(-100, 100)
-        self.canvas = FigureCanvas(self.fig)
-        self.toolbar = NavigationToolbar(self.canvas, self)
+#        self.toolbar = NavigationToolbar(self.canvas, self)
         self.horizontalLayout11.addWidget(self.canvas)
         FigureCanvas.setSizePolicy(self,
                                    QSizePolicy.Expanding,
@@ -191,7 +190,7 @@ class  Function(  QDialog, Ui_MainWindow):
 #       newWindow.show()
 #       newWindow.exec_()
 
-class SecondWindow(  QWidget):#暂时没用
+class SecondWindow( QWidget):#暂时没用
 #   def __init__(self, parent=None):
 #        super(SecondWindow, self).__init__(parent)
 #        self.resize(200, 200)
