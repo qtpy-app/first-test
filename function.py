@@ -36,6 +36,7 @@ class SecondWindow(QWidget):#暂时没用
     def __init__(self, parent=None):
         super().__init__(parent)
 
+
         self.figure = plt.figure()
         self.axes = self.figure.add_subplot(111)
         # We want the axes cleared every time plot() is called
@@ -91,76 +92,34 @@ class SecondWindow(QWidget):#暂时没用
         if not self.isVisible():
 
             self.show()    
-#    def zujian(self):
-#        pass
-#    def setupUi(self, MainWindow):
-#        pass
+#        if self.lineEdit23.text()=='':
+#            self.lineEdit23.setText('0')
+#        elif self.lineEdit23.text()!='0':
+#            self.horizontalLayoutWidget.setGeometry(QtCore.QRect(50, 250, 420, 180))
+#        elif self.lineEdit23.text()=='0':
+#            self.horizontalLayoutWidget.setGeometry(QtCore.QRect(50, 250, 370, 180))            
+#        if self.lineEdit22.text()=='0' and self.lineEdit22.text()=='0':
+#            print('4')
+#    @pyqtSlot()
+#    def on_pushButton_2_clicked(self):
+#       newWindow = SecondWindow()
+#       newWindow.show()
+#       newWindow.exec_()
 
-class  Function(  QDialog, Ui_MainWindow):
-    def __init__(self, parent=None):
-        super(Function, self).__init__(parent)
-        self.setupUi(self)
-        self.zujian()
+#    def xxx(self, value):
+#        print("second xxx:", value)#对比用
+        #print(x+10)#这个是可以的
 
-        # region LineEdit控件组
-    def zujian(self):    
-        regExp1=QRegExp(r'(?:-?\d+,?)')#正则规则1
-        regExp2=QRegExp(r'^\d*$')#正则规则1       
-        self.lineEdit22.setValidator(QRegExpValidator(regExp2,self)) 
-        self.lineEdit23.setValidator(QRegExpValidator(regExp2,self)) 
-        
-        self.lineEdit1 = MyLineEdit(self.gridLayoutWidget_2)
-        self.lineEdit1.setObjectName("lineEdit1")
-        self.gridLayout_2.addWidget(self.lineEdit1, 2, 1, 1, 1)
-#        self.lineEdit1.setValidator(QRegExpValidator(regExp1,self))         
-        
-        
-        self.lineEdit2 = MyLineEdit(self.gridLayoutWidget_2)
-        self.lineEdit2.setObjectName("lineEdit2")
-        self.gridLayout_2.addWidget(self.lineEdit2, 3, 1, 1, 1)
-#        self.lineEdit2.setValidator(QRegExpValidator(regExp1,self)) 
+#    def Xm(self, value):#集中力偶位置
+#        self.XmList=list(value)
+#        c1=self.XmList.count(',')
+#        c2=self.XmList.count('，')
+#        c_xm=c1+c2+1
+#        print(c_xm)
 
 
-        self.lineEdit3 = MyLineEdit(self.gridLayoutWidget_2)
-        self.lineEdit3.setObjectName("lineEdit3")
-        self.gridLayout_2.addWidget(self.lineEdit3, 4, 1, 1, 1)
-#        self.lineEdit3.setValidator(QRegExpValidator(regExp1,self)) 
-
-        # endregion
-        # region 注册过滤
-        self.lineEdit3.installEventFilter(self)
-        self.lineEdit2.installEventFilter(self)
-        self.lineEdit1.installEventFilter(self)
-        
-        '''信号============================================================='''
-        self.fig = plt.figure(figsize=(4, 1), dpi=80)
-        self.canvas = FigureCanvas(self.fig)
-        self.axes = self.fig.add_subplot(111)
-
-        self.axes.set_xticks(np.linspace(-100, 100, 2, endpoint=True))
-        self.axes.set(xlim=[-50,500],ylim=[-100,100])
-#        self.axes.axis('off')
-        self.Type1.clicked.connect(self.setEnabled)
-        self.Type2.clicked.connect(self.setEnabled)
-        self.Type3.clicked.connect(self.setEnabled)
-        self.lineEdit21.textEdited.connect(self.setEnabled)               
-        self.lineEdit22.textEdited.connect(self.setEnabled)
-        self.lineEdit23.textEdited.connect(self.setEnabled)
-#        plt.xlim(0,500)
-#        plt.ylim(-100, 100)
-#        self.toolbar = NavigationToolbar(self.canvas, self)
-        self.horizontalLayout11.addWidget(self.canvas)
-        FigureCanvas.setSizePolicy(self,
-                                   QSizePolicy.Expanding,
-                                   QSizePolicy.Expanding)
-        FigureCanvas.updateGeometry(self)
-#        a = SecondWindow()
-#        self.lineEdit21.textEdited.connect(a.test3)
-
-#
 #        self.frame= MyPlot(self.tab)
 #        self.frame.setGeometry(QtCore.QRect(0,230, 470, 200))
-#        
 #        self.lineEdit11.textEdited.connect(self.frame.getvvv)
 #        self.lineEdit12.textEdited.connect(self.frame.getvvv)        
 #        self.lineEdit21.textEdited.connect(self.frame.Get_one)
@@ -195,7 +154,65 @@ class  Function(  QDialog, Ui_MainWindow):
 #                pass
 #        except ValueError:
 #            QMessageBox.critical(self,"注意","只能输入数值!")
+        # endregion        
+class  Function(  QDialog, Ui_MainWindow):
+    def __init__(self, parent=None):
+        super(Function, self).__init__(parent)
+        self.setupUi(self)
+        self.zujian()
+        self.Type2.setEnabled(True)
+        # region LineEdit控件组
+    def zujian(self):    
+        regExp1=QRegExp(r'(?:-?\d+,?)')#正则规则1
+        regExp2=QRegExp(r'^\d*$')#正则规则1       
+        self.lineEdit22.setValidator(QRegExpValidator(regExp2,self)) 
+        self.lineEdit23.setValidator(QRegExpValidator(regExp2,self)) 
+        
+        self.lineEdit1 = MyLineEdit(self.gridLayoutWidget_2)
+        self.lineEdit1.setObjectName("lineEdit1")
+        self.gridLayout_2.addWidget(self.lineEdit1, 2, 1, 1, 1)
+#        self.lineEdit1.setValidator(QRegExpValidator(regExp1,self))         
+        
+        
+        self.lineEdit2 = MyLineEdit(self.gridLayoutWidget_2)
+        self.lineEdit2.setObjectName("lineEdit2")
+        self.gridLayout_2.addWidget(self.lineEdit2, 3, 1, 1, 1)
+#        self.lineEdit2.setValidator(QRegExpValidator(regExp1,self)) 
+
+
+        self.lineEdit3 = MyLineEdit(self.gridLayoutWidget_2)
+        self.lineEdit3.setObjectName("lineEdit3")
+        self.gridLayout_2.addWidget(self.lineEdit3, 4, 1, 1, 1)
+#        self.lineEdit3.setValidator(QRegExpValidator(regExp1,self)) 
+
         # endregion
+        # region 注册过滤
+        self.lineEdit3.installEventFilter(self)
+        self.lineEdit2.installEventFilter(self)
+        self.lineEdit1.installEventFilter(self)
+
+        
+        '''信号============================================================='''
+        self.fig = plt.figure(figsize=(4, 1), dpi=80)
+        self.canvas = FigureCanvas(self.fig)
+        self.axes = self.fig.add_subplot(111)
+
+        self.axes.set_xticks(np.linspace(-100, 550, 14, endpoint=True))
+        self.axes.set(xlim=[-50,550],ylim=[-100,100])
+#        self.axes.axis('off')
+        self.Type1.clicked.connect(self.setEnabled)
+        self.Type2.clicked.connect(self.setEnabled)
+        self.Type3.clicked.connect(self.setEnabled)
+        self.lineEdit21.textEdited.connect(self.setEnabled)               
+        self.lineEdit22.textEdited.connect(self.setEnabled)
+        self.lineEdit23.textEdited.connect(self.setEnabled)
+#        self.toolbar = NavigationToolbar(self.canvas, self)
+        self.horizontalLayout11.addWidget(self.canvas)
+        FigureCanvas.setSizePolicy(self,
+                                   QSizePolicy.Expanding,
+                                   QSizePolicy.Expanding)
+        FigureCanvas.updateGeometry(self)
+
     
     def eventFilter(self, obj, event):
 
@@ -247,12 +264,14 @@ class  Function(  QDialog, Ui_MainWindow):
             self.lineEdit22.setEnabled(False)
             self.lineEdit23.setEnabled(False)
         elif self.Type2.isChecked():
-            self.lineEdit12.setEnabled(True)
-            self.lineEdit11.setEnabled(True)
-            self.pushButton3.setEnabled(False)
-            self.pushButton4.setEnabled(False)
+
             self.pushButton1.setEnabled(True)
             self.pushButton2.setEnabled(True)
+            self.lineEdit12.setEnabled(True)
+            self.lineEdit11.setEnabled(True)
+            
+            self.pushButton3.setEnabled(False)
+            self.pushButton4.setEnabled(False)
             self.checkBox1.setEnabled(False)
             self.checkBox2.setEnabled(False)
             self.checkBox1.setChecked(False)
@@ -269,41 +288,28 @@ class  Function(  QDialog, Ui_MainWindow):
             self.checkBox1.setEnabled(True)
             self.checkBox2.setEnabled(True)
             self.lineEdit22.setEnabled(True)
-            self.lineEdit23.setEnabled(True)            
+            self.lineEdit23.setEnabled(True)     
         if self.lineEdit21.text()=='':
             self.lineEdit21.setText('0')   
-        if self.lineEdit21.text()!='0':
+        elif self.lineEdit21.text()!='0':
             self.groupBox_3.setEnabled(True) 
-            self.Type2.setEnabled(True) 
-        if self.lineEdit21.text()=='0':    
-            self.groupBox_3.setEnabled(False)             
+        elif self.lineEdit21.text()=='0':    
+            self.groupBox_3.setEnabled(False)   
+            
         if self.lineEdit22.text()=='':
             self.lineEdit22.setText('0')    
-        if self.lineEdit23.text()=='':
-            self.lineEdit23.setText('0')
-
-            
-
-#        if self.lineEdit22.text()=='0' and self.lineEdit22.text()=='0':
-#            print('4')
-#    @pyqtSlot()
-#    def on_pushButton_2_clicked(self):
-#       newWindow = SecondWindow()
-#       newWindow.show()
-#       newWindow.exec_()
-
-#    def xxx(self, value):
-#        print("second xxx:", value)#对比用
-        #print(x+10)#这个是可以的
-
-#    def Xm(self, value):#集中力偶位置
-#        self.XmList=list(value)
-#        c1=self.XmList.count(',')
-#        c2=self.XmList.count('，')
-#        c_xm=c1+c2+1
-#        print(c_xm)
-
+        elif self.lineEdit22.text()!='0' and self.lineEdit23.text()=='0':
+            self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 250, 420, 180))
+        elif self.lineEdit22.text()=='0' and self.lineEdit23.text()!='0':
+            self.horizontalLayoutWidget.setGeometry(QtCore.QRect(40, 250, 420, 180))
+        elif  self.lineEdit22.text()!='0' and self.lineEdit23.text()!='0':
+            self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 250,420, 180))
+        elif self.lineEdit22.text()=='0' and self.lineEdit23.text()=='0':
+            self.horizontalLayoutWidget.setGeometry(QtCore.QRect(50, 250,370, 180))
         
+        if self.lineEdit23.text()=='':
+            self.lineEdit23.setText('0')   
+
 class MyPlot(Function):
     """动态画布：每秒自动更新，更换一条折线。"""
     def __init__(self, parent=None):
@@ -313,7 +319,9 @@ class MyPlot(Function):
 #        timer.timeout.connect(self.update_figure)
         timer.start(1000)
         self.Type1.clicked.connect(self.update_figure)  
-        self.Type2.clicked.connect(self.update_figure)          
+        self.Type2.clicked.connect(self.update_figure)  
+        self.Type3.clicked.connect(self.update_figure)
+        
         self.lineEdit1.textEdited.connect(self.update_figure)
         self.lineEdit2.textEdited.connect(self.update_figure)
         self.lineEdit3.textEdited.connect(self.update_figure)
@@ -332,11 +340,11 @@ class MyPlot(Function):
         self.NME, self.NP, self.NQ=0, 0, 0
         
     def drawline(self):
-        self.axes.plot([0, 450],[0, 0], 'k-', linewidth=1, antialiased=False)#杆长
-        if self.lineEdit22.text()!='0':
-            self.axes.plot([20, 50],[0, 0], 'k-', linewidth=1, antialiased=False)#杆长
+        self.axes.plot([0, 480],[0, 0], 'k-', linewidth=1, antialiased=False)#杆长
+#        if self.lineEdit22.text()!='0':
+#            self.axes.plot([20, 50],[0, 0], 'k-', linewidth=1, antialiased=False)#杆长
         if self.lineEdit23.text()!='0':
-            self.axes.plot([450, 480],[0, 0], 'k-', linewidth=1, antialiased=False)#杆长
+            self.axes.plot([480, 530],[0, 0], 'k-', linewidth=1, antialiased=False)#杆长
     def drawPin(self):#固定铰支
         e=np.array([])
         x=[]
@@ -369,7 +377,7 @@ class MyPlot(Function):
         if d[-1]!='':
             for b,n in enumerate(d):
                 x.append(n)
-                x[b]=float(x[b])
+                x[b]=float(x[b])/self.K
                 if x[b]>=0:
                     self.axes.plot([x[b]], [-9] ,'ko',  markersize=9.5, fillstyle= 'none')#圆        
                     self.axes.plot([x[b]-15, x[b]+15],[-16, -16], 'k-', linewidth=1, antialiased=True)#杆长
@@ -404,7 +412,7 @@ class MyPlot(Function):
                     self.PX.append(self.P[b][0])
                     self.PX[b]=float(self.PX[b])
                     if self.PX[b]>=0:
-                        self.axes.arrow(self.PX[b], 25, 0, -25, linewidth=1,head_width=8, fc='k',  antialiased=True, length_includes_head=True)#集中力P
+                        self.axes.arrow(self.PX[b]/self.K, 25, 0, -25, linewidth=1,head_width=8, fc='k',  antialiased=True, length_includes_head=True)#集中力P
 
 #'''===================均布载荷=================='''
     def draw_distributed_load(self):#均布载荷
@@ -449,20 +457,20 @@ class MyPlot(Function):
                 self.MEX.append(self.ME[b][0])
                 self.MEX[b]=float(self.MEX[b])
                 if self.MEX[b]>=0:
-                    self.axes.arrow(self.MEX[b], 16, 10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
-                    self.axes.arrow(self.MEX[b], -15, -10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
-                    self.axes.plot([self.MEX[b],self.MEX[b]], [15, -15],  'k-', linewidth=2, antialiased=True)#弯矩M
+                    self.axes.arrow(self.MEX[b]/self.K, 16, 10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
+                    self.axes.arrow(self.MEX[b]/self.K, -15, -10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
+                    self.axes.plot([self.MEX[b]/self.K,self.MEX[b]/self.K], [15, -15],  'k-', linewidth=2, antialiased=True)#弯矩M
                 else :
                     self.MEX[b]=abs(self.MEX[b])
-                    self.axes.arrow(self.MEX[b], 16, -10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
-                    self.axes.arrow(self.MEX[b], -15, 10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
-                    self.axes.plot([self.MEX[b],self.MEX[b]], [15, -15],  'k-', linewidth=2, antialiased=True)#弯矩M                    
+                    self.axes.arrow(self.MEX[b]/self.K, 16, -10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
+                    self.axes.arrow(self.MEX[b]/self.K, -15, 10,0, linewidth=1,head_width=5, fc='k', antialiased=True)#弯矩M
+                    self.axes.plot([self.MEX[b]/self.K,self.MEX[b]/self.K], [15, -15],  'k-', linewidth=2, antialiased=True)#弯矩M                    
     
     def update_figure(self):
         self.calc()
         self.axes.cla()
-        self.axes.set_xticks(np.linspace(-100, 500, 13, endpoint=True))
-        self.axes.set(xlim=[-50,500],ylim=[-100,100])
+        self.axes.set_xticks(np.linspace(-100, 550, 14, endpoint=True))
+        self.axes.set(xlim=[-50,550],ylim=[-100,100])
 #        self.axes.axis('off')
         self.drawline()
         
@@ -481,7 +489,9 @@ class MyPlot(Function):
         L=float(self.lineEdit21.text())
         L1=float(self.lineEdit22.text())
         L2=float(self.lineEdit23.text())
-        self.K=(L1+L2+L)/450
+        self.K=(L1+L2+L)/480
+        if self.lineEdit23.text()!='0':
+            self.K=(L1+L2+L)/530
         print(self.K)
         QX, MX=0 , 0
         N=100
@@ -502,18 +512,14 @@ class MyPlot(Function):
         for a in range(self.NME):
             
             if self.Type1.isChecked():
-                if self.lineEdit22.text()=='0':
-                    pass
-                if self.lineEdit23.text()=='0':
-                    pass
-                if self.lineEdit22.text()=='0' and self.lineEdit23.text()=='0':
+                if self.lineEdit22.text()=='' and self.lineEdit23.text()=='':
                     pass
             if self.Type2.isChecked():
                 if self.lineEdit22.text()=='0' and self.lineEdit23.text()=='0':#简支梁
                     pass
-                if self.lineEdit22.text()=='0':#左外伸梁
+                if self.lineEdit22.text()=='0' and self.lineEdit23.text()!='0':#右外伸梁
                     pass
-                if self.lineEdit23.text()=='0':#右外伸梁
+                if self.lineEdit22.text()!='0' and self.lineEdit23.text()=='0':#左外伸梁
                     pass
                 if self.lineEdit22.text()!='0' and self.lineEdit23.text()!='0':#左右外伸梁
                     pass
