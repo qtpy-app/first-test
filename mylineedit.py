@@ -29,3 +29,4 @@ class MyLineEdit(QtWidgets.QLineEdit):
 #        print( 'enterEvent')
 #    def mouseMoveEvent(self,e):
 #        print( 'mouseMoveEvent')
+#123123123
