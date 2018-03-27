@@ -1,0 +1,8 @@
+<RCC>
+  <qresource>
+    <file>Resources/固定铰支.jpg</file>
+    <file>Resources/活动铰支.jpg</file>
+    <file>Resources/右端悬臂ico.jpg</file>
+    <file>Resources/左端悬臂ico.jpg</file>
+  </qresource>
+</RCC>
